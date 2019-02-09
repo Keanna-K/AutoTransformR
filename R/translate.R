@@ -1,4 +1,4 @@
-transform <- function(image_path, num_images, max_translation){
+translate <- function(image_path, num_images, max_translation){
     """Returns an array of images of length num_images randomly translated a random number of pixels up to max_rotation
 
     Translate takes the path to and image and generates randomly translated images, the desired number

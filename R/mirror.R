@@ -11,5 +11,7 @@ mirror <- function(image_path, direction = 'all') {
   #'
   #' @return array: pixel values of the mirrored image(s)
   #' @export
+  #'
+  #' @examples
 
 }

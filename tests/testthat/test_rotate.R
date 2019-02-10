@@ -16,6 +16,6 @@ test_that("Test max_rotation in valid range", {
 test_that("Test function returns", {
   test_img <- readImage("test_img")
   returned_arr <- translate("test_image", 5, 10)
-  expect_is(len(returned_arr) == 5)
-  expect_is(dim(returned_arr)[1] == dim(test_img))
+  expect_is(dim(returned_arr)[length(dim(returned_arr))] == 5)
+  expect_is(dim(returned_arr)[1:length(dim(test_img))-1] == dim(test_img))
 })

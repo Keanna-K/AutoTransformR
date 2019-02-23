@@ -1,23 +1,25 @@
 # This script tests the mirror function
 # library(testthat)
+library(OpenImageR)
 
 context("Mirror")
 
+test_img <- readImage("../img/milad.jpg")
+
 test_that("Test that parameters are the correct type", {
-  expect_error(mirror("Path", 7), "direction is not a string, it must be: 'horizonal', 'vertical', 'all'")
+  expect_error(mirror(test_img, 7), "direction is not a string, it must be: 'horizonal', 'vertical', 'all'")
   expect_error(mirror(True, "horizontal"), "image_path is not a string")
 })
 
 test_that("Test direction is valid string", {
-  expect_error(mirror("Path", "h"), "direction is not a valid string option for direction. Choose between: 'horizontal', 'vertical', 'all'")
+  expect_error(mirror(test_img, "h"), "Invalid direction for mirroring. Choose between: 'horizontal', 'vertical', 'all'")
 })
 
 test_that("Test that image file path is correct", {
-  expect_error(mirror("img/Path"), "Incorrect directory/file not found")
+  expect_error(mirror("not_an_img.jpg"), "Incorrect directory/file not found")
 })
 
 test_that("Test for correct output dimensions", {
-  test_img <- readImage("test_img")
   returned_arr_1a <- pre.mirror(test_img, "horizontal")  # should return 1 image
   returned_arr_1b <- pre.mirror(test_img, "vertical")  # should return 1 image
   returned_arr_2a <- pre.mirror(test_img, "all")  # should return 2 images

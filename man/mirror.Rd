@@ -9,10 +9,10 @@ mirror(image_path, direction = "all")
 \arguments{
 \item{image_path}{string: the file path of the image to be mirrored}
 
-\item{direction}{string: dirction of mirroring. Options: 'horizontal', 'vertical', 'all'. Default setting 'all'}
+\item{direction}{string: dirction of mirroring. Options: 'horizontal', 'vertical', 'all'. Defaults to 'all'}
 }
 \value{
-array: pixel values of the mirrored image(s)
+array/matrix: pixel values of the original image and mirrored image(s)
 }
 \description{
 Mirror takes the path to an image and generates a mirrored version of that image in the horizontal direction, vertical direction, or both.

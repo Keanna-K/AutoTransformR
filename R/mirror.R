@@ -16,12 +16,22 @@ mirror <- function(image_path, direction = 'all') {
   #' @examples
 
 
+  # check for correct function inputs
+  if(!is.character(image_path)){
+    stop("Error: image_path is not a string")
+  }
+  if(!is.character(direction)){
+    stop("Error: direction is not a string, it must be: 'horizonal', 'vertical', 'all'")
+  }
+  if(!(tolower(direction) %in% c("horizontal","vertical", "all"))){
+    stop("Invalid direction for mirroring. Choose between: 'horizontal', 'vertical', 'all'")
+  }
+  if(!file.exists(image_path)){
+    stop("Incorrect directory/file not found")
+  }
 
-  assert("image_path must be a string", is.character(image_path))
-  assert("direction must be a string: 'horizontal', 'vertical', or 'all'", is.character(direction))
-  assert("Invalid direction for mirroring. Choose between 'horizontal', 'vertical', 'all'", tolower(direction) %in% c("horizontal","vertical", "all"))
-  assert("Incorrect directory/file not found", file.exists(image_path)) # finish this line
 
+  # read in image as array/matrix
   original <- readImage(image_path)
 
   # mirror in horizontal direction
@@ -34,7 +44,7 @@ mirror <- function(image_path, direction = 'all') {
      else {
        img <- original[, ncol(original):1]
      }
-    mirrored_images <- array(c(original, img), dim = c(original, 2))
+    mirrored_images <- array(c(original, img), dim = c(dim(original), 2))
   }
 
   # mirror in vertical direction
@@ -47,7 +57,7 @@ mirror <- function(image_path, direction = 'all') {
     else {
       img <- original[nrow(original):1, ]
     }
-    mirrored_images <- array(c(original, img), dim = c(original, 2))
+    mirrored_images <- array(c(original, img), dim = c(dim(original), 2))
   }
 
   # mirror in both horizontal and vertical direction
@@ -62,7 +72,7 @@ mirror <- function(image_path, direction = 'all') {
       h_img <- original[, ncol(original):1]
       v_img <- original[nrow(original):1, ]
     }
-    mirrored_images <- array(c(original, h_img, v_img), dim = c(original, 3))
+    mirrored_images <- array(c(original, h_img, v_img), dim = c(dim(original), 3))
   }
 
   return(mirrored_images)

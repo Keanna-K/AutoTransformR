@@ -22,20 +22,20 @@ test_that("Test direction is valid string", {
 })
 
 test_that("Test that image file path is correct", {
-  expect_error(mirror("not_an_img.jpg"), "Incorrect directory/file not found")
+  expect_error(mirror("not_an_img.jpg"), "Incorrect directory/image not found")
 })
 
-returned_arr_1a <- mirror(test_img_str, "horizontal")  # should return 2 images, coloured image
-returned_arr_1b <- mirror(bw_test_img_str, "vertical")  # should return 2 images, b&w image
-returned_arr_2a <- mirror(test_img_str, "all")  # should return 3 images, coloured image
-returned_arr_2b <- mirror(bw_test_img_str)  # all is default, should return 3 images, b&w image
+returned_arr_1a <- mirror(test_img_str, "horizontal")
+returned_arr_1b <- mirror(bw_test_img_str, "vertical")
+returned_arr_2a <- mirror(test_img_str, "all")
+returned_arr_2b <- mirror(bw_test_img_str)
 
 test_that("Test for correct output dimensions", {
-  expect_equal(dim(returned_arr_1a)[length(dim(returned_arr_1a))], 2)
-  expect_equal(dim(returned_arr_1b)[length(dim(returned_arr_1b))], 2)
-  expect_equal(dim(returned_arr_2a)[length(dim(returned_arr_2a))], 3)
-  expect_equal(dim(returned_arr_2b)[length(dim(returned_arr_2b))], 3)
-  expect_equal(dim(returned_arr_1a), c(dim(test_img),2))
+  expect_equal(dim(returned_arr_1a)[length(dim(returned_arr_1a))], 2)  # should return 2 images (original, horiz), testing coloured image
+  expect_equal(dim(returned_arr_1b)[length(dim(returned_arr_1b))], 2)  # should return 2 images (original, vert), testing b&w image
+  expect_equal(dim(returned_arr_2a)[length(dim(returned_arr_2a))], 3)  # should return 3 images (original, horiz, vert), testing coloured image
+  expect_equal(dim(returned_arr_2b)[length(dim(returned_arr_2b))], 3)  # all is default, should return 3 images (original, horiz, vert), testing b&w image
+  expect_equal(dim(returned_arr_1a), c(dim(test_img),2))  # photo dimensions of returned images should be the same as original image
   expect_equal(dim(returned_arr_2a)[-length(dim(returned_arr_2b))], dim(test_img)) # check that the 1st image in the array has the same dim as original
 })
 
@@ -44,6 +44,7 @@ test_that("Test that horizontal and vertical mirroring are occuring when specifi
     expect_equal(returned_arr_1b[1,,2], bw_test_img[nrow(bw_test_img),])  # check vertical mirroring occurs in b&w photo
     expect_equal(returned_arr_2b[,1,2], bw_test_img[,ncol(bw_test_img)])  # check horizontal mirroring on first image in array in b&w photo
     expect_equal(returned_arr_2a[1,,,3], test_img[nrow(test_img),,])  # check vertical mirroring on second image in array in colour photo
+    expect_equal(returned_arr_1a[,,,1], test_img)  # check that first image in returned images is the original image
 
 })
 

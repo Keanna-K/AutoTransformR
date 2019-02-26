@@ -1,5 +1,3 @@
-suppressPackageStartupMessages(library(OpenImageR))
-
 mirror <- function(image_path, direction = 'all') {
 
   #' Mirror an image
@@ -14,12 +12,18 @@ mirror <- function(image_path, direction = 'all') {
   #' @export
   #'
   #' @examples
+  #' mirror("tests/testthat/img/milad.jpg", "horizontal")
+  #' mirror("tests/testthat/img/bw.png", "vertical")
+  #' mirror("tests/testthat/img/bw.png", "all")
+  #' mirror("tests/testthat/img/milad.jpg")
 
+
+  require(OpenImageR)
 
   # check for correct function inputs
   if(!is.character(image_path)){
     stop("Error: image_path is not a string")
-  }
+  }ins
   if(!is.character(direction)){
     stop("Error: direction is not a string, it must be: 'horizonal', 'vertical', 'all'")
   }
@@ -27,12 +31,12 @@ mirror <- function(image_path, direction = 'all') {
     stop("Invalid direction for mirroring. Choose between: 'horizontal', 'vertical', 'all'")
   }
   if(!file.exists(image_path)){
-    stop("Incorrect directory/file not found")
+    stop("Incorrect directory/image not found")
   }
 
 
   # read in image as array/matrix
-  original <- readImage(image_path)
+  original <- OpenImageR::readImage(image_path)
 
   # mirror in horizontal direction
   if(tolower(direction) == 'horizontal'){

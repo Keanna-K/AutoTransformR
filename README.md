@@ -1,6 +1,6 @@
 # AutoTransform
 
-### Contributors
+## Contributors
 
 | Name | GitHub |
 |---|---|
@@ -9,36 +9,104 @@
 | Rayce Rossum | [RayceRossum](https://github.com/RayceRossum) |
 
 
-### Overview
+## Overview
 
-A common application of supervised machine learning is identifying the object of an image. One issue that users encounter is a model misclassifying a new image because the object is rotated or translated in some way that was not captured in the training images. The purpose of this package is to create a more robust set of images for users to train their model with. The package will accept an image as an input, apply a series of translations to it, as specified by the user, and return an array of translated pixel values. Translations include: rotating, mirroring, and translating (shifting the object's location in the frame).
-
-### Functions
-
-##### Rotate
-- Parameters:
-  - Image to transform (string: PATH)
-  - Number of images to generate (integer)
-  - Maximum rotation in degrees (integer)
-- Returns:
-  - Array of randomly rotated (within max range) images of length based on number of images parameter
-
-##### Mirror
-- Parameters:
-  - Image to transform (string: PATH)
-  - Direction of mirroring (string: 'horizontal', 'vertical', 'both')
-- Returns:
-  - Array of mirrored image(s)
-
-##### Translate
-- Parameters:
-  - Image to transform (string: PATH)
-  - Number of images to generate (integer)
-  - Maximum distance in pixels (integer)
-- Returns:
-  - Array of randomly translated (within max range) images of length based on number of images parameter
+A common application of supervised machine learning is identifying the object of an image. One issue that users encounter is a model misclassifying a new image because the object is rotated or translated in some way that was not captured in the training images. The purpose of this package is to create a more robust set of images for users to train their model with. The package will accept an image as an input, apply a series of transformations to it, and return an array of transformed pixel values. Transformations include: rotating, mirroring, and translating (shifting the object's location in the frame).
 
 
-### Similar Packages
+## Functions
 
-Scikit-image is a image processing package that contains functions for performing various operations to images, such as rotating or resizing, among many others. R has a new package, OpenImageR, that is similar to scikit-image that has functions for image preprocessing, filtering, and image recognition. Our plan is to utilize some of these packages functionality and build them out so a user could pass in example images, from a training dataset for example, and get back different variations of them. We believe this could signficantly help in the training of image classification algorthims.
+#### Rotate
+
+Rotates an image the user-specified number of times. The degree of rotation is chosen randomly and may be in either the clockwise or counter-clockwise direction. The user specifies the maximum rotation angle. It returns the pixel values of the rotated images.
+
+#### Mirror
+
+Mirrors an image in the horizontal and/or vertical direction and returns the pixel values of the mirrored image(s).
+
+#### Translate
+
+Translate will move an image within its frame, so that the topic of the image will be shifted to a new location in the frame. The distance and direction of translation will be chosen randomly, but the user specifies the maximum distance of the translation and the number of images they want generated. It returns the pixel values of the translated images.
+
+
+## R Environment
+
+OpenImageR is an image processing package in CRAN that contains functions for various operations to images, such as reading and showing the images, rotating, mirroring, and resizing, among other things. The intended usage of AutoTransformR is for the development of a larger set of training images for the training of an image classification algorithms. AutoTransformR's utilizes OpenImageR and base R, but allows the user to transform an image in multiple ways at once and returns the original and transformed images as an array that can be used as a training set in machine learning.
+
+
+## Installation
+
+```
+# install.packages("devtools")
+devtools::install_github("UBC-MDS/AutoTransformR")
+```
+
+
+## Usage
+
+### Rotate
+
+`library(AutoTransformR)`
+
+`rotate(image_path, num_images, max_rotation)`
+
+**Arguments:**
+
+- `image_path`: file path of the input image (string)
+- `num_images`: number of randomly rotated images to be returned (integer)
+- `max_rotation`: maximum allowable degrees of rotation of the images (integer) between 1 and 360
+
+**Output:**
+
+- An array of pixel values of the rotated images. Array contains `num_images` + 1 images (original plus all rotated images)
+
+**Example:**
+
+- `rotate("../tests/testthat/img/milad.jpg", 10, 280)`
+
+
+### Mirror
+
+`library(AutoTransformR)`
+
+`mirror(image_path, direction)`
+
+**Arguments:**
+
+- `image_path`: file path of the input image (string)
+- `direction`: direction of mirroring (string, optional) 'horizontal', 'vertical', or 'all'. If not specified, defaults to 'all'
+
+**Output:**
+
+- An array of pixel values of the mirrored images. Array contains 3 images if `direction = 'all'` (original, horizontally mirrored, vertically mirrored) or 2 images if direction is horizontal or vertical (original image, mirrored image)
+
+**Example:**
+
+- `mirror("../tests/testthat/img/milad.jpg", "horizontal")`
+
+
+### Translate
+
+`library(AutoTransformR)`
+
+`translate(image_path, num_images, max_translation)`
+
+**Arguments:**
+
+- `image_path`: file path of the input image (string)
+- `num_images`: number of randomly translated images to be returned (integer)
+- `max_translation`: maximum distance in pixels that the image can be translated (integer)
+
+**Output**
+
+- An array of pixel values of the translated images. Array contains `num_images` + 1 images (original plus all translated images)
+
+**Example:**
+
+- `translate("../tests/testthat/img/milad.jpg", 5, 80)`
+
+
+## Package Dependencies
+
+- `OpenImageR`
+

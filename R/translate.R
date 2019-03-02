@@ -23,24 +23,24 @@ translate <- function(image_path, num_images, max_translation){
     stop("Error: image_path is not a string")
   }
   if(!file.exists(image_path)){
-    stop("Incorrect directory/file not found")
+    stop("Incorrect directory/image not found")
   }
 
   if(is.character(max_translation)){
-    stop("Error: direction is not a string, it must be: 'horizonal', 'vertical', 'all'")
+    stop("Error: max_translation must be an integer")
   }
   if(is.character(num_images)){
-    stop("Error: direction is not a string, it must be: 'horizonal', 'vertical', 'all'")
+    stop("Error: num_images must be an integer")
   }
   if(num_images < 1){
-    stop("Error: direction is not a string, it must be: 'horizonal', 'vertical', 'all'")
+    stop("Error: num_images must be 1 or greater")
   }
 
   # read in image as array/matrix
   original <- readImage(image_path)
 
   if(max_translation >= dim(original)[1] | max_translation >= dim(original)[2]){
-    stop("Error: direction is not a string, it must be: 'horizonal', 'vertical', 'all'")
+    stop("Error: max_translation must be less than the width and height of the image")
   }
 
   translations_x <- sample(-max_translation:max_translation, num_images, replace = TRUE)
@@ -48,11 +48,12 @@ translate <- function(image_path, num_images, max_translation){
 
   translated_images <- c(original)
 
-  for(i in 1:length(translations_x)) { #offset for original being included at the start
+  for(i in 1:(num_images)) { #offset for original being included at the start
+    print(i)
     translated_images <- c(translated_images, translation(original, shift_rows = translations_x[i], shift_cols = translations_y[i]))
   }
 
-  translated_images <- array(translated_images, dim = c(dim(original), num_images))
+  translated_images <- array(translated_images, dim = c(dim(original), num_images+1))
 
   return(translated_images)
 }

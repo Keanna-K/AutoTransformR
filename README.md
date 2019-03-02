@@ -18,15 +18,15 @@ A common application of supervised machine learning is identifying the object of
 
 #### Rotate
 
-Rotates an image the user-specified number of times. The degree of rotation is chosen randomly and may be in either the clockwise or counter-clockwise direction. The user specifies the maximum rotation angle. It returns the pixel values of the rotated images.
+Rotates an image the user-specified number of times. The image will be rotated to a random degree of roation in the clockwise direction, with the maximum rotation angle specified by the user. The pixel values of the original and rotated images is returned.
 
 #### Mirror
 
-Mirrors an image in the horizontal and/or vertical direction and returns the pixel values of the mirrored image(s).
+Mirrors an image in the horizontal and/or vertical direction and returns the pixel values of the original and mirrored image(s).
 
 #### Translate
 
-Translate will move an image within its frame, so that the topic of the image will be shifted to a new location in the frame. The distance and direction of translation will be chosen randomly, but the user specifies the maximum distance of the translation and the number of images they want generated. It returns the pixel values of the translated images.
+Translate will move an image within its frame, so that the topic of the image will be shifted to a new location in the frame. The distance and direction of translation will be chosen randomly, but the user specifies the maximum distance of the translation and the number of images they want generated. It returns the pixel values of the original and translated images.
 
 
 ## R Environment
@@ -110,3 +110,37 @@ devtools::install_github("UBC-MDS/AutoTransformR")
 
 - `OpenImageR`
 
+
+## Full Example Usage & Output
+
+```
+# devtools::install_github("UBC-MDS/AutoTransformR")
+
+library(AutoTransformR)
+library(OpenImageR)
+
+# perform transformations on the image
+m <- mirror("../tests/testthat/img/milad.jpg", "horizontal")
+r <- rotate("../tests/testthat/img/milad.jpg", 10, 280)
+t <- translate("../tests/testthat/img/milad.jpg", 5, 80)
+
+
+# Check that the output is a 4D array:
+# First 2 dimensions are the image pixel values
+# third dim is color (rgb)
+# fourth dimension is the number of photos the array contains
+dim(m)  # mirror function
+dim(r)  # rotate function
+dim(t)  # translate function
+
+# View original photo
+imageShow(m[,,,1])  # mirror function
+imageShow(r[,,,1])  # rotate function
+imageShow(t[,,,1])  # translate function
+
+# View one of the translated photos
+imageShow(m[,,,2])  # mirror function
+imageShow(r[,,,2])  # rotate function
+imageShow(t[,,,2])  # translate function
+
+```

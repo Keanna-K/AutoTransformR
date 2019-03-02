@@ -49,7 +49,6 @@ translate <- function(image_path, num_images, max_translation){
   translated_images <- c(original)
 
   for(i in 1:(num_images)) { #offset for original being included at the start
-    print(i)
     translated_images <- c(translated_images, translation(original, shift_rows = translations_x[i], shift_cols = translations_y[i]))
   }
 
@@ -57,5 +56,3 @@ translate <- function(image_path, num_images, max_translation){
 
   return(translated_images)
 }
-
-translate("/home/rayce/Assignments/Block 5/DSCI 524/AutoTransformR-Master/tests/testthat/img/bw.png", 10, 100)

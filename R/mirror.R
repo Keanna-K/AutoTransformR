@@ -23,7 +23,7 @@ mirror <- function(image_path, direction = 'all') {
   # check for correct function inputs
   if(!is.character(image_path)){
     stop("Error: image_path is not a string")
-  }ins
+  }
   if(!is.character(direction)){
     stop("Error: direction is not a string, it must be: 'horizonal', 'vertical', 'all'")
   }

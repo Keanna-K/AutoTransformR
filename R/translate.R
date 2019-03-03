@@ -1,3 +1,5 @@
+require(OpenImageR)
+
 translate <- function(image_path, num_images, max_translation){
   #' Returns an array of images of length num_images randomly translated a random number of pixels up to max_rotation
   #'
@@ -14,4 +16,43 @@ translate <- function(image_path, num_images, max_translation){
   #'
   #' @examples
 
+
+
+  # check for correct function inputs
+  if(!is.character(image_path)){
+    stop("Error: image_path is not a string")
+  }
+  if(!file.exists(image_path)){
+    stop("Incorrect directory/image not found")
+  }
+
+  if(is.character(max_translation)){
+    stop("Error: max_translation must be an integer")
+  }
+  if(is.character(num_images)){
+    stop("Error: num_images must be an integer")
+  }
+  if(num_images < 1){
+    stop("Error: num_images must be 1 or greater")
+  }
+
+  # read in image as array/matrix
+  original <- readImage(image_path)
+
+  if(max_translation >= dim(original)[1] | max_translation >= dim(original)[2]){
+    stop("Error: max_translation must be less than the width and height of the image")
+  }
+
+  translations_x <- sample(-max_translation:max_translation, num_images, replace = TRUE)
+  translations_y <- sample(-max_translation:max_translation, num_images, replace = TRUE)
+
+  translated_images <- c(original)
+
+  for(i in 1:(num_images)) { #offset for original being included at the start
+    translated_images <- c(translated_images, translation(original, shift_rows = translations_x[i], shift_cols = translations_y[i]))
+  }
+
+  translated_images <- array(translated_images, dim = c(dim(original), num_images+1))
+
+  return(translated_images)
 }

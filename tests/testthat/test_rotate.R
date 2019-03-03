@@ -1,4 +1,4 @@
-# This script tests the translate function
+# This script tests the rotate function
 # library(testthat)
 
 context("Rotate")

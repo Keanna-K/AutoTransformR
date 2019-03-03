@@ -144,3 +144,5 @@ imageShow(r[,,,2])  # rotate function
 imageShow(t[,,,2])  # translate function
 
 ```
+
+## Output of Tests

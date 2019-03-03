@@ -134,9 +134,7 @@ dim(r)  # rotate function
 dim(t)  # translate function
 
 # View original photo
-imageShow(m[,,,1])  # mirror function
-imageShow(r[,,,1])  # rotate function
-imageShow(t[,,,1])  # translate function
+imageShow(m[,,,1])  # mirror function example
 
 # View one of the translated photos
 imageShow(m[,,,2])  # mirror function
@@ -145,4 +143,38 @@ imageShow(t[,,,2])  # translate function
 
 ```
 
-## Output of Tests
+## Testing
+
+#### Output of Tests:
+
+```
+> library(devtools)
+> test()
+Loading AutoTransformR
+Testing AutoTransformR
+??? | OK F W S | Context
+??? | 17       | Mirror [1.3 s]
+??? |  8       | Rotate [2.2 s]
+??? |  8       | Translate [1.0 s]
+
+== Results =====================================================================
+Duration: 4.5 s
+
+OK:       33
+Failed:   0
+Warnings: 0
+Skipped:  0
+
+```
+
+#### Code Coverage:
+
+```
+> library(covr)
+> package_coverage()
+AutoTransformR Coverage: 96.97%
+R/rotate.R: 94.74%
+R/translate.R: 95.00%
+R/mirror.R: 100.00%
+
+```

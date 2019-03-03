@@ -21,3 +21,9 @@ Translate takes the path to and image and generates randomly translated images, 
 of times. Each translated image will not be translated more than the maximum distance provided.
 The translation can be in any direction.
 }
+\examples{
+translate("tests/testthat/img/milad.jpg", 5, 10)
+translate("tests/testthat/img/milad.jpg", 10, 20)
+translate("tests/testthat/img/milad.jpg", 15, 50)
+translate("tests/testthat/img/milad.jpg", 20, 100)
+}

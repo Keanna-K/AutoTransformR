@@ -11,13 +11,18 @@ rotate(image_path, num_images, max_rotation)
 
 \item{num_images}{integer: The number of rotated images to be returned.}
 
-\item{rotation}{integer: The maximum allowable rotation for any of the rotated images. Can be between 1 and 360.}
+\item{max_rotation}{integer: The maximum allowable rotation for any of the rotated images. Can be between 1 and 360, inclusive.}
 }
 \value{
-array: pixel values of the translated images
+array: pixel values of the rotated images
 }
 \description{
 Rotate takes the path to an image and generates randomly rotated images, the desired number
 of times. Each rotated image will not be rotated more than the maximum rotation angle provided.
-The rotation can be both clockwise or counter-clockwise.
+}
+\examples{
+rotate("tests/testthat/img/milad.jpg", 5, 180)
+rotate("tests/testthat/img/milad.jpg", 10, 320)
+rotate("tests/testthat/img/milad.jpg", 15, 350)
+rotate("tests/testthat/img/milad.jpg", 20, 355)
 }

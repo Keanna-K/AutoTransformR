@@ -18,3 +18,9 @@ array/matrix: pixel values of the original image and mirrored image(s)
 Mirror takes the path to an image and generates a mirrored version of that image in the horizontal direction, vertical direction, or both.
 It returns an array of pixel values for the mirrored image(s).
 }
+\examples{
+mirror("tests/testthat/img/milad.jpg", "horizontal")
+mirror("tests/testthat/img/bw.png", "vertical")
+mirror("tests/testthat/img/bw.png", "all")
+mirror("tests/testthat/img/milad.jpg")
+}

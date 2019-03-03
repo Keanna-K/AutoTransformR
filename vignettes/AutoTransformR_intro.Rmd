@@ -4,7 +4,7 @@ author: "Alycia Butterworth, Brenden Everitt, Rayce Rossum"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Introduction to AutoTransformR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -118,13 +118,33 @@ t <- translate("../tests/testthat/img/milad.jpg", 8, 60)
 dim(m)  # mirror function
 dim(r)  # rotate function
 dim(t)  # translate function
-
-# View original photo
-imageShow(m[,,,1])  # mirror function example
-
-# View one of the translated photos
-imageShow(m[,,,2])  # mirror function
-imageShow(r[,,,2])  # rotate function
-imageShow(t[,,,2])  # translate function
-
 ```
+
+**Original Image**  
+
+```{r, echo = FALSE, fig.align='center'}
+# View original photo
+imageShow(m[,,,1])
+```
+
+**Mirrored Image**  
+
+```{r, echo = FALSE, fig.align='center'}
+imageShow(m[,,,2])  # mirror function
+```
+
+**Rotated Image**  
+
+```{r, echo = FALSE, fig.align='center'}
+imageShow(r[,,,3])  # rotate function
+```
+
+**Translated Image**  
+
+```{r, echo = FALSE, fig.align='center'}
+# View one of the translated photos
+imageShow(t[,,,2])  # translate function
+```
+
+
+

@@ -1,0 +1,150 @@
+---
+title: "Introduction to AutoTransformR"
+author: "Alycia Butterworth, Brenden Everitt, Rayce Rossum"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to AutoTransformR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Rotate
+
+**Introduction:**
+
+Rotates an image the user-specified number of times. The image will be rotated to a random degree of roation in the clockwise direction, with the maximum rotation angle specified by the user. The pixel values of the original and rotated images is returned.
+
+**Function:**
+
+`rotate(image_path, num_images, max_rotation)`
+
+**Arguments:**
+
+- `image_path`: file path of the input image (string)
+- `num_images`: number of randomly rotated images to be returned (integer)
+- `max_rotation`: maximum allowable degrees of rotation of the images (integer) between 1 and 360
+
+**Output:**
+
+- An array of pixel values of the rotated images. Array contains `num_images` + 1 images (original plus all rotated images)
+
+**Example:**
+
+- `rotate("../tests/testthat/img/milad.jpg", 10, 280)`
+
+
+## Mirror
+
+**Introduction:**
+
+Mirrors an image in the horizontal and/or vertical direction and returns the pixel values of the original and mirrored image(s).
+
+**Function:**
+
+`mirror(image_path, direction)`
+
+**Arguments:**
+
+- `image_path`: file path of the input image (string)
+- `direction`: direction of mirroring (string, optional) 'horizontal', 'vertical', or 'all'. If not specified, defaults to 'all'
+
+**Output:**
+
+- An array of pixel values of the mirrored images. Array contains 3 images if `direction = 'all'` (original, horizontally mirrored, vertically mirrored) or 2 images if direction is horizontal or vertical (original image, mirrored image)
+
+**Example:**
+
+- `mirror("../tests/testthat/img/milad.jpg", "horizontal")`
+
+
+## Translate
+
+**Introduction:**
+
+Translate will move an image within its frame, so that the topic of the image will be shifted to a new location in the frame. The distance and direction of translation will be chosen randomly, but the user specifies the maximum distance of the translation and the number of images they want generated. It returns the pixel values of the original and translated images.
+
+**Function:**
+
+`translate(image_path, num_images, max_translation)`
+
+**Arguments:**
+
+- `image_path`: file path of the input image (string)
+- `num_images`: number of randomly translated images to be returned (integer)
+- `max_translation`: maximum distance in pixels that the image can be translated (integer)
+
+**Output**
+
+- An array of pixel values of the translated images. Array contains `num_images` + 1 images (original plus all translated images)
+
+**Example:**
+
+- `translate("../tests/testthat/img/milad.jpg", 5, 80)`
+
+
+
+## More Examples
+
+```{r}
+
+library(AutoTransformR)
+library(OpenImageR)
+
+# perform transformations on the image
+
+# mirror function with horizontal and vertical mirroring
+m <- mirror("../tests/testthat/img/milad.jpg")
+
+# rotation with 8 rotated images returned and a maximum rotation of 360 degrees
+r <- rotate("../tests/testthat/img/milad.jpg", 8, 360)
+
+# translation with 8 translated images returned and a maximum translation of 60 pixels
+t <- translate("../tests/testthat/img/milad.jpg", 8, 60)
+
+
+# Check that the output is a 4D array:
+# First 2 dimensions are the image pixel values
+# third dim is color (rgb)
+# fourth dimension is the number of photos the array contains
+dim(m)  # mirror function
+dim(r)  # rotate function
+dim(t)  # translate function
+```
+
+**Original Image**  
+
+```{r, echo = FALSE, fig.align='center'}
+# View original photo
+imageShow(m[,,,1])
+```
+
+**Mirrored Image**  
+
+```{r, echo = FALSE, fig.align='center'}
+imageShow(m[,,,2])  # mirror function
+```
+
+**Rotated Image**  
+
+```{r, echo = FALSE, fig.align='center'}
+imageShow(r[,,,3])  # rotate function
+```
+
+**Translated Image**  
+
+```{r, echo = FALSE, fig.align='center'}
+# View one of the translated photos
+imageShow(t[,,,2])  # translate function
+```
+
+
+

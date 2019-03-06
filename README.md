@@ -1,7 +1,7 @@
-# AutoTransformR <img src="img/logo.png" width="180" align="right"/>
+# AutoTransformR <img src="img/logo.png" width="160" align="right"/>
 
-[![Build Status](https://travis-ci.org/UBC-MDS/AutoTransformR.svg?branch=admin_tasks)](https://travis-ci.org/UBC-MDS/AutoTransformR)
-[![Coverage status](https://codecov.io/gh/UBC-MDS/AutoTransformR/branch/admin_tasks/graph/badge.svg)](https://codecov.io/github/UBC-MDS/AutoTransformR?branch=admin_tasks)
+[![Build Status](https://travis-ci.org/UBC-MDS/AutoTransformR.svg?branch=master)](https://travis-ci.org/UBC-MDS/AutoTransformR)
+[![Coverage status](https://codecov.io/gh/UBC-MDS/AutoTransformR/branch/master/graph/badge.svg)](https://codecov.io/github/UBC-MDS/AutoTransformR?branch=master)
 
 ## Contributors
 
@@ -11,7 +11,7 @@
 | Brenden Everitt | [everittB](https://github.com/everittB) |
 | Rayce Rossum | [RayceRossum](https://github.com/RayceRossum) |
 
-To contribute to this project, you must adhere to the terms outlined in our our [Code of Conduct.](https://github.com/UBC-MDS/AutoTransformR/blob/master/CONDUCT.md)
+To contribute to this project, you must adhere to the terms outlined in our [Code of Conduct.](https://github.com/UBC-MDS/AutoTransformR/blob/master/CONDUCT.md)
 
 
 ## Overview

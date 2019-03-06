@@ -1,4 +1,7 @@
-# AutoTransform
+# AutoTransformR <img src="img/logo.png" width="180" align="right"/>
+
+[![Build Status](https://travis-ci.org/UBC-MDS/AutoTransformR.svg?branch=admin_tasks)](https://travis-ci.org/UBC-MDS/AutoTransformR)
+[![Coverage status](https://codecov.io/gh/UBC-MDS/AutoTransformR/branch/admin_tasks/graph/badge.svg)](https://codecov.io/github/UBC-MDS/AutoTransformR?branch=admin_tasks)
 
 ## Contributors
 
@@ -8,10 +11,20 @@
 | Brenden Everitt | [everittB](https://github.com/everittB) |
 | Rayce Rossum | [RayceRossum](https://github.com/RayceRossum) |
 
+To contribute to this project, you must adhere to the terms outlined in our our [Code of Conduct.](https://github.com/UBC-MDS/AutoTransformR/blob/master/CONDUCT.md)
+
 
 ## Overview
 
 A common application of supervised machine learning is identifying the object of an image. One issue that users encounter is a model misclassifying a new image because the object is rotated or translated in some way that was not captured in the training images. The purpose of this package is to create a more robust set of images for users to train their model with. The package will accept an image as an input, apply a series of transformations to it, and return an array of transformed pixel values. Transformations include: rotating, mirroring, and translating (shifting the object's location in the frame).
+
+
+## Installation
+
+```
+# install.packages("devtools")
+devtools::install_github("UBC-MDS/AutoTransformR")
+```
 
 
 ## Functions
@@ -29,26 +42,20 @@ Mirrors an image in the horizontal and/or vertical direction and returns the pix
 Translate will move an image within its frame, so that the topic of the image will be shifted to a new location in the frame. The distance and direction of translation will be chosen randomly, but the user specifies the maximum distance of the translation and the number of images they want generated. It returns the pixel values of the original and translated images.
 
 
-## R Environment
+## R Ecosystem
 
-OpenImageR is an image processing package in CRAN that contains functions for various operations to images, such as reading and showing the images, rotating, mirroring, and resizing, among other things. The intended usage of AutoTransformR is for the development of a larger set of training images for the training of an image classification algorithms. AutoTransformR's utilizes OpenImageR and base R, but allows the user to transform an image in multiple ways at once and returns the original and transformed images as an array that can be used as a training set in machine learning.
+ The intended usage of AutoTransformR is for the development of a larger set of training images for the training of an image classification algorithms. A similar package, OpenImageR, is an image processing package in CRAN that contains functions for various operations to images, such as reading and showing the images, rotating, mirroring, and resizing, among other things. AutoTransformR's utilizes OpenImageR and base R, but allows the user to transform an image in multiple ways at once and returns the original and transformed images as an array that can be used as a training set in machine learning. 
 
-
-## Installation
-
-```
-# install.packages("devtools")
-devtools::install_github("UBC-MDS/AutoTransformR")
-```
 
 
 ## Usage
 
 ### Rotate
 
-`library(AutoTransformR)`
-
-`rotate(image_path, num_images, max_rotation)`
+```
+library(AutoTransformR)
+rotate(image_path, num_images, max_rotation)
+```
 
 **Arguments:**
 
@@ -67,9 +74,10 @@ devtools::install_github("UBC-MDS/AutoTransformR")
 
 ### Mirror
 
-`library(AutoTransformR)`
-
-`mirror(image_path, direction)`
+```
+library(AutoTransformR)
+mirror(image_path, direction)
+```
 
 **Arguments:**
 
@@ -87,9 +95,10 @@ devtools::install_github("UBC-MDS/AutoTransformR")
 
 ### Translate
 
-`library(AutoTransformR)`
-
-`translate(image_path, num_images, max_translation)`
+```
+library(AutoTransformR)
+translate(image_path, num_images, max_translation)
+```
 
 **Arguments:**
 
@@ -111,70 +120,11 @@ devtools::install_github("UBC-MDS/AutoTransformR")
 - `OpenImageR`
 
 
-## Full Example Usage & Output
+## Comprehensive Usage Guide
+
+For a more comprehensive guide to using AutoTransformR, read the vignette. View the vignette in R:
 
 ```
-# devtools::install_github("UBC-MDS/AutoTransformR")
-
-library(AutoTransformR)
-library(OpenImageR)
-
-# perform transformations on the image
-m <- mirror("../tests/testthat/img/milad.jpg", "horizontal")
-r <- rotate("../tests/testthat/img/milad.jpg", 10, 280)
-t <- translate("../tests/testthat/img/milad.jpg", 5, 80)
-
-
-# Check that the output is a 4D array:
-# First 2 dimensions are the image pixel values
-# third dim is color (rgb)
-# fourth dimension is the number of photos the array contains
-dim(m)  # mirror function
-dim(r)  # rotate function
-dim(t)  # translate function
-
-# View original photo
-imageShow(m[,,,1])  # mirror function example
-
-# View one of the translated photos
-imageShow(m[,,,2])  # mirror function
-imageShow(r[,,,2])  # rotate function
-imageShow(t[,,,2])  # translate function
-
+vignette("AutoTransformR_intro", package = "AutoTransformR")
 ```
 
-## Testing
-
-#### Output of Tests:
-
-```
-> library(devtools)
-> test()
-Loading AutoTransformR
-Testing AutoTransformR
-??? | OK F W S | Context
-??? | 17       | Mirror [1.3 s]
-??? |  8       | Rotate [2.2 s]
-??? |  8       | Translate [1.0 s]
-
-== Results =====================================================================
-Duration: 4.5 s
-
-OK:       33
-Failed:   0
-Warnings: 0
-Skipped:  0
-
-```
-
-#### Code Coverage:
-
-```
-> library(covr)
-> package_coverage()
-AutoTransformR Coverage: 96.97%
-R/rotate.R: 94.74%
-R/translate.R: 95.00%
-R/mirror.R: 100.00%
-
-```

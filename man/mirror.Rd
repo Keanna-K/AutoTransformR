@@ -19,8 +19,10 @@ Mirror takes the path to an image and generates a mirrored version of that image
 It returns an array of pixel values for the mirrored image(s).
 }
 \examples{
-mirror("tests/testthat/img/milad.jpg", "horizontal")
-mirror("tests/testthat/img/bw.png", "vertical")
-mirror("tests/testthat/img/bw.png", "all")
-mirror("tests/testthat/img/milad.jpg")
+\dontrun{
+mirror("../tests/testthat/img/milad.jpg", "horizontal")
+mirror("../tests/testthat/img/bw.png", "vertical")
+mirror("../tests/testthat/img/bw.png", "all")
+mirror("../tests/testthat/img/milad.jpg")
+}
 }

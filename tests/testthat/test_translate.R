@@ -18,7 +18,7 @@ test_that("Test max_translation is in valid range", {
 })
 
 test_that("Test that image file path is correct", {
-  expect_error(mirror("not_an_img.jpg"), "Incorrect directory/image not found")
+  expect_error(translate("not_an_img.jpg", 5, 2), "Incorrect directory/image not found")
 })
 
 test_that("Test function returns", {

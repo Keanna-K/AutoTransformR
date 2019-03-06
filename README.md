@@ -1,8 +1,20 @@
-# AutoTransformR
+# AutoTransformR <img src="img/logo.png" width="200" align="right"/>
 
 [![Build Status](https://travis-ci.org/UBC-MDS/AutoTransformR.svg?branch=admin_tasks)](https://travis-ci.org/UBC-MDS/AutoTransformR)
 [![Coverage status](https://codecov.io/gh/UBC-MDS/AutoTransformR/branch/admin_tasks/graph/badge.svg)](https://codecov.io/github/UBC-MDS/AutoTransformR?branch=admin_tasks)
 
+## Contributors
+
+| Name | GitHub |
+|---|---|
+| Alycia Butterworth | [alyciakb](https://github.com/alyciakb) |
+| Brenden Everitt | [everittB](https://github.com/everittB) |
+| Rayce Rossum | [RayceRossum](https://github.com/RayceRossum) |
+
+To contribute to this project, you must adhere to the terms outlined in our our [Code of Conduct.](https://github.com/UBC-MDS/AutoTransformR/blob/master/CONDUCT.md)
+
+
+## Overview
 
 A common application of supervised machine learning is identifying the object of an image. One issue that users encounter is a model misclassifying a new image because the object is rotated or translated in some way that was not captured in the training images. The purpose of this package is to create a more robust set of images for users to train their model with. The package will accept an image as an input, apply a series of transformations to it, and return an array of transformed pixel values. Transformations include: rotating, mirroring, and translating (shifting the object's location in the frame).
 
@@ -40,9 +52,10 @@ Translate will move an image within its frame, so that the topic of the image wi
 
 ### Rotate
 
-`library(AutoTransformR)`
-
-`rotate(image_path, num_images, max_rotation)`
+```
+library(AutoTransformR)
+rotate(image_path, num_images, max_rotation)
+```
 
 **Arguments:**
 
@@ -61,9 +74,10 @@ Translate will move an image within its frame, so that the topic of the image wi
 
 ### Mirror
 
-`library(AutoTransformR)`
-
-`mirror(image_path, direction)`
+```
+library(AutoTransformR)
+mirror(image_path, direction)
+```
 
 **Arguments:**
 
@@ -81,9 +95,10 @@ Translate will move an image within its frame, so that the topic of the image wi
 
 ### Translate
 
-`library(AutoTransformR)`
-
-`translate(image_path, num_images, max_translation)`
+```
+library(AutoTransformR)
+translate(image_path, num_images, max_translation)
+```
 
 **Arguments:**
 
@@ -113,13 +128,3 @@ For a more comprehensive guide to using AutoTransformR, read the vignette. View 
 vignette("AutoTransformR_intro", package = "AutoTransformR")
 ```
 
-
-## Contributors
-
-| Name | GitHub |
-|---|---|
-| Alycia Butterworth | [alyciakb](https://github.com/alyciakb) |
-| Brenden Everitt | [everittB](https://github.com/everittB) |
-| Rayce Rossum | [RayceRossum](https://github.com/RayceRossum) |
-
-To contribute to this project, you must adhere to the terms outlined in our our [Code of Conduct.](https://github.com/UBC-MDS/AutoTransformR/blob/master/CONDUCT.md)

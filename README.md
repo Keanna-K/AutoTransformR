@@ -1,7 +1,7 @@
-# AutoTransformR <img src="img/logo.png" width="180" align="right"/>
+# AutoTransformR <img src="img/logo.png" width="160" align="right"/>
 
-[![Build Status](https://travis-ci.org/UBC-MDS/AutoTransformR.svg?branch=admin_tasks)](https://travis-ci.org/UBC-MDS/AutoTransformR)
-[![Coverage status](https://codecov.io/gh/UBC-MDS/AutoTransformR/branch/admin_tasks/graph/badge.svg)](https://codecov.io/github/UBC-MDS/AutoTransformR?branch=admin_tasks)
+[![Build Status](https://travis-ci.org/UBC-MDS/AutoTransformR.svg?branch=master)](https://travis-ci.org/UBC-MDS/AutoTransformR)
+[![Coverage status](https://codecov.io/gh/UBC-MDS/AutoTransformR/branch/master/graph/badge.svg)](https://codecov.io/github/UBC-MDS/AutoTransformR?branch=master)
 
 ## Contributors
 

@@ -1,10 +1,10 @@
 ---
-title: "Introduction to AutoTransformR"
+title: "Guide to AutoTransformR"
 author: "Alycia Butterworth, Brenden Everitt, Rayce Rossum"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to AutoTransformR}
+  %\VignetteIndexEntry{Guide to AutoTransformR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,10 +16,13 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Introduction
 
-## Rotate
+A common application of supervised machine learning is identifying the object of an image. One issue that users encounter is a model misclassifying a new image because the object is rotated or translated in some way that was not captured in the training images. The purpose of this package is to create a more robust set of images for users to train their model with. The package will accept an image as an input, apply a series of transformations to it, and return an array of transformed pixel values. Transformations include: rotating, mirroring, and translating (shifting the object's location in the frame).
 
-**Introduction:**
+## Functions
+
+### Rotate
 
 Rotates an image the user-specified number of times. The image will be rotated to a random degree of roation in the clockwise direction, with the maximum rotation angle specified by the user. The pixel values of the original and rotated images is returned.
 
@@ -42,9 +45,7 @@ Rotates an image the user-specified number of times. The image will be rotated t
 - `rotate("../tests/testthat/img/milad.jpg", 10, 280)`
 
 
-## Mirror
-
-**Introduction:**
+### Mirror
 
 Mirrors an image in the horizontal and/or vertical direction and returns the pixel values of the original and mirrored image(s).
 
@@ -66,9 +67,7 @@ Mirrors an image in the horizontal and/or vertical direction and returns the pix
 - `mirror("../tests/testthat/img/milad.jpg", "horizontal")`
 
 
-## Translate
-
-**Introduction:**
+### Translate
 
 Translate will move an image within its frame, so that the topic of the image will be shifted to a new location in the frame. The distance and direction of translation will be chosen randomly, but the user specifies the maximum distance of the translation and the number of images they want generated. It returns the pixel values of the original and translated images.
 
@@ -92,14 +91,12 @@ Translate will move an image within its frame, so that the topic of the image wi
 
 
 
-## More Examples
+## Usage Examples
+
+Perform transformations on the image using the mirror, rotate, and translate functions:
 
 ```{r}
-
 library(AutoTransformR)
-library(OpenImageR)
-
-# perform transformations on the image
 
 # mirror function with horizontal and vertical mirroring
 m <- mirror("../tests/testthat/img/milad.jpg")
@@ -108,42 +105,64 @@ m <- mirror("../tests/testthat/img/milad.jpg")
 r <- rotate("../tests/testthat/img/milad.jpg", 8, 360)
 
 # translation with 8 translated images returned and a maximum translation of 60 pixels
-t <- translate("../tests/testthat/img/milad.jpg", 8, 60)
+t <- translate("../tests/testthat/img/milad.jpg", 5, 60)
 
+```
 
-# Check that the output is a 4D array:
-# First 2 dimensions are the image pixel values
-# third dim is color (rgb)
-# fourth dimension is the number of photos the array contains
+**OUTPUT:**
+
+Use `dim()` to see the dimensions of the returned array.
+
+- first 2 dimensions are the image pixel values
+- third dim is rgb color (for coloured images only, this dimension will not exist if the image is fully black and white)
+- fourth dimension is the number of photos the array contains
+
+```{r}
 dim(m)  # mirror function
+```
+
+```{r}
 dim(r)  # rotate function
+```
+
+```{r}
 dim(t)  # translate function
 ```
 
-**Original Image**  
+**VIEW TRANSFORMED IMAGES:**
 
-```{r, echo = FALSE, fig.align='center'}
-# View original photo
+To access individual images in the returned array, you must use the last dimension of the array to index to the image in question. The first image in the array is the original, the transformed images follow. Below are examples of how to view the images using the the function `imageshow` from the package `OpenImageR`.
+
+**Original Image:**  
+
+```{r, fig.align='center'}
+library(OpenImageR)
+
+# View original image
 imageShow(m[,,,1])
 ```
 
-**Mirrored Image**  
+**Mirrored Image:**  
 
-```{r, echo = FALSE, fig.align='center'}
-imageShow(m[,,,2])  # mirror function
+If the direction of mirroring is "all", the array will have the horizontally mirrored image at index 2, and the vertically mirrored image at index 3.
+
+```{r, fig.align='center'}
+# view horizontal mirroring
+imageShow(m[,,,2])
 ```
 
-**Rotated Image**  
+**Rotated Image:**  
 
-```{r, echo = FALSE, fig.align='center'}
-imageShow(r[,,,3])  # rotate function
+```{r, fig.align='center'}
+# view one of the rotated images
+imageShow(r[,,,3])
 ```
 
-**Translated Image**  
+**Translated Image:**  
 
-```{r, echo = FALSE, fig.align='center'}
-# View one of the translated photos
-imageShow(t[,,,2])  # translate function
+```{r, fig.align='center'}
+# view one of the translated images
+imageShow(t[,,,2])
 ```
 
 

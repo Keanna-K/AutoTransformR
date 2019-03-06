@@ -11,7 +11,7 @@
 | Brenden Everitt | [everittB](https://github.com/everittB) |
 | Rayce Rossum | [RayceRossum](https://github.com/RayceRossum) |
 
-To contribute to this project, you must adhere to the terms outlined in our our [Code of Conduct.](https://github.com/UBC-MDS/AutoTransformR/blob/master/CONDUCT.md)
+To contribute to this project, you must adhere to the terms outlined in our [Code of Conduct.](https://github.com/UBC-MDS/AutoTransformR/blob/master/CONDUCT.md)
 
 
 ## Overview

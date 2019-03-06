@@ -12,10 +12,12 @@ rotate <- function(image_path, num_images, max_rotation){
   #' @export
   #'
   #' @examples
-  #' rotate("tests/testthat/img/milad.jpg", 5, 180)
-  #' rotate("tests/testthat/img/milad.jpg", 10, 320)
-  #' rotate("tests/testthat/img/milad.jpg", 15, 350)
-  #' rotate("tests/testthat/img/milad.jpg", 20, 355)
+  #' \dontrun{
+  #' rotate("../tests/testthat/img/milad.jpg", 5, 180)
+  #' rotate("../tests/testthat/img/milad.jpg", 10, 320)
+  #' rotate("../tests/testthat/img/milad.jpg", 15, 350)
+  #' rotate("../tests/testthat/img/milad.jpg", 20, 355)
+  #' }
 
 
   require(OpenImageR)

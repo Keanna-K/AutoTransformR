@@ -15,10 +15,12 @@ translate <- function(image_path, num_images, max_translation){
   #' @export
   #'
   #' @examples
-  #' translate("tests/testthat/img/milad.jpg", 5, 10)
-  #' translate("tests/testthat/img/milad.jpg", 10, 20)
-  #' translate("tests/testthat/img/milad.jpg", 15, 50)
-  #' translate("tests/testthat/img/milad.jpg", 20, 100)
+  #' \dontrun{
+  #' translate("../tests/testthat/img/milad.jpg", 5, 10)
+  #' translate("../tests/testthat/img/milad.jpg", 10, 20)
+  #' translate("../tests/testthat/img/milad.jpg", 15, 50)
+  #' translate("../tests/testthat/img/milad.jpg", 20, 100)
+  #' }
 
 
 

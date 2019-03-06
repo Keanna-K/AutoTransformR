@@ -12,10 +12,12 @@ mirror <- function(image_path, direction = 'all') {
   #' @export
   #'
   #' @examples
-  #' mirror("tests/testthat/img/milad.jpg", "horizontal")
-  #' mirror("tests/testthat/img/bw.png", "vertical")
-  #' mirror("tests/testthat/img/bw.png", "all")
-  #' mirror("tests/testthat/img/milad.jpg")
+  #' \dontrun{
+  #' mirror("../tests/testthat/img/milad.jpg", "horizontal")
+  #' mirror("../tests/testthat/img/bw.png", "vertical")
+  #' mirror("../tests/testthat/img/bw.png", "all")
+  #' mirror("../tests/testthat/img/milad.jpg")
+  #' }
 
 
   require(OpenImageR)

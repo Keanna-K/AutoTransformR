@@ -21,8 +21,10 @@ Rotate takes the path to an image and generates randomly rotated images, the des
 of times. Each rotated image will not be rotated more than the maximum rotation angle provided.
 }
 \examples{
-rotate("tests/testthat/img/milad.jpg", 5, 180)
-rotate("tests/testthat/img/milad.jpg", 10, 320)
-rotate("tests/testthat/img/milad.jpg", 15, 350)
-rotate("tests/testthat/img/milad.jpg", 20, 355)
+\dontrun{
+rotate("../tests/testthat/img/milad.jpg", 5, 180)
+rotate("../tests/testthat/img/milad.jpg", 10, 320)
+rotate("../tests/testthat/img/milad.jpg", 15, 350)
+rotate("../tests/testthat/img/milad.jpg", 20, 355)
+}
 }

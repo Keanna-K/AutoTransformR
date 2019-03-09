@@ -28,10 +28,6 @@ translate <- function(image_path, num_images, max_translation){
   if(!is.character(image_path)){
     stop("Error: image_path is not a string")
   }
-  if(!file.exists(image_path)){
-    stop("Incorrect directory/image not found")
-  }
-
   if(is.character(max_translation)){
     stop("Error: max_translation must be an integer")
   }
@@ -42,8 +38,19 @@ translate <- function(image_path, num_images, max_translation){
     stop("Error: num_images must be 1 or greater")
   }
 
+  read_image <- function(file_path){
+    tryCatch(
+      OpenImageR::readImage(file_path),
+
+      # Catch error from readImage
+      error=function(e){
+        stop("Incorrect directory/image not found")
+      }
+    )
+  }
+
   # read in image as array/matrix
-  original <- readImage(image_path)
+  original <- read_image(image_path)
 
   if(max_translation >= dim(original)[1] | max_translation >= dim(original)[2]){
     stop("Error: max_translation must be less than the width and height of the image")

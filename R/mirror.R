@@ -19,7 +19,6 @@ mirror <- function(image_path, direction = 'all') {
   #' mirror("../tests/testthat/img/milad.jpg")
   #' }
 
-
   require(OpenImageR)
 
   # check for correct function inputs
@@ -32,13 +31,20 @@ mirror <- function(image_path, direction = 'all') {
   if(!(tolower(direction) %in% c("horizontal","vertical", "all"))){
     stop("Invalid direction for mirroring. Choose between: 'horizontal', 'vertical', 'all'")
   }
-  if(!file.exists(image_path)){
-    stop("Incorrect directory/image not found")
+
+  read_image <- function(file_path){
+    tryCatch(
+      OpenImageR::readImage(file_path),
+
+      # Catch error from readImage
+      error=function(e){
+        stop("Incorrect directory/image not found")
+      }
+    )
   }
 
-
   # read in image as array/matrix
-  original <- OpenImageR::readImage(image_path)
+  original <- read_image(image_path)
 
   # mirror in horizontal direction
   if(tolower(direction) == 'horizontal'){

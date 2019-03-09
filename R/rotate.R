@@ -19,7 +19,6 @@ rotate <- function(image_path, num_images, max_rotation){
   #' rotate("../tests/testthat/img/milad.jpg", 20, 355)
   #' }
 
-
   require(OpenImageR)
 
   # check for valid input parameter types
@@ -47,11 +46,18 @@ rotate <- function(image_path, num_images, max_rotation){
     stop("Error: max_rotation must be between 1 and 360, inclusive")
   }
 
-  if(!file.exists(image_path)){
-    stop("Incorrect directory/image not found")
+  read_image <- function(file_path){
+    tryCatch(
+      OpenImageR::readImage(file_path),
+
+      # Catch error from readImage
+      error=function(e){
+        stop("Incorrect directory/image not found")
+      }
+    )
   }
 
-  org_image <- readImage(image_path)
+  org_image <- read_image(image_path)
   rotations = sample(c(1:max_rotation), num_images, replace = TRUE)
   rotated_images = c(org_image)
 
